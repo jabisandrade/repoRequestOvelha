@@ -12,6 +12,8 @@ public class Request {
 		HttpURLConnection servletConnection = null;
 		URL url;
 		OutputStreamWriter wr = null;
+		GeraLog log = new GeraLog();
+		
 
 		try {
 			//url = new URL(args[0]);
@@ -29,12 +31,19 @@ public class Request {
 			wr.close();
 
 			if (((HttpURLConnection) servletConnection).getResponseCode() == HttpURLConnection.HTTP_OK) {
+				log.LogTxt("Sucesso ", "Request");
 				System.exit(0);//Sucesso
+				
+				
 			} else {
+				log.LogTxt("Erro ", "Request");
 				System.exit(1);//Erro
+				
 			}
 		} catch (Exception e) {
+			log.LogTxt("Erro :"+e.getMessage(), "Request");
 			System.exit(1);//Erro
+			
 		} finally {
 			if (wr != null) {
 				try {
